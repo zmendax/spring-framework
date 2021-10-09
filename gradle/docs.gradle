@@ -44,40 +44,40 @@ task api(type: Javadoc) {
 /**
  * Produce KDoc for all Spring Framework modules in "build/docs/kdoc"
  */
-dokka {
-	dependsOn {
-		tasks.getByName("api")
-	}
-	doFirst {
-		classpath = moduleProjects.collect { project -> project.jar.outputs.files.getFiles() }.flatten()
-		classpath += files(moduleProjects.collect { it.sourceSets.main.compileClasspath })
-		sourceDirs = files(moduleProjects
-				.findAll {
-					it.pluginManager.hasPlugin("kotlin")
-				}
-				.collect { project ->
-					def kotlinDirs = project.sourceSets.main.kotlin.srcDirs.collect()
-					kotlinDirs -= project.sourceSets.main.java.srcDirs
-				})
-	}
-	moduleName = "spring-framework"
-	outputFormat = "html"
-	outputDirectory = "$buildDir/docs/kdoc"
-
-	externalDocumentationLink {
-		url = new URL("https://docs.spring.io/spring-framework/docs/$version/javadoc-api/")
-		packageListUrl = new File(buildDir, "docs/javadoc/package-list").toURI().toURL()
-	}
-	externalDocumentationLink {
-		url = new URL("https://projectreactor.io/docs/core/release/api/")
-	}
-	externalDocumentationLink {
-		url = new URL("https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/")
-	}
-	externalDocumentationLink {
-		url = new URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
-	}
-}
+//dokka {
+//	dependsOn {
+//		tasks.getByName("api")
+//	}
+//	doFirst {
+//		classpath = moduleProjects.collect { project -> project.jar.outputs.files.getFiles() }.flatten()
+//		classpath += files(moduleProjects.collect { it.sourceSets.main.compileClasspath })
+//		sourceDirs = files(moduleProjects
+//				.findAll {
+//					it.pluginManager.hasPlugin("kotlin")
+//				}
+//				.collect { project ->
+//					def kotlinDirs = project.sourceSets.main.kotlin.srcDirs.collect()
+//					kotlinDirs -= project.sourceSets.main.java.srcDirs
+//				})
+//	}
+//	moduleName = "spring-framework"
+//	outputFormat = "html"
+//	outputDirectory = "$buildDir/docs/kdoc"
+//
+//	externalDocumentationLink {
+//		url = new URL("https://docs.spring.io/spring-framework/docs/$version/javadoc-api/")
+//		packageListUrl = new File(buildDir, "docs/javadoc/package-list").toURI().toURL()
+//	}
+//	externalDocumentationLink {
+//		url = new URL("https://projectreactor.io/docs/core/release/api/")
+//	}
+//	externalDocumentationLink {
+//		url = new URL("https://www.reactive-streams.org/reactive-streams-1.0.1-javadoc/")
+//	}
+//	externalDocumentationLink {
+//		url = new URL("https://kotlin.github.io/kotlinx.coroutines/kotlinx-coroutines-core/")
+//	}
+//}
 
 task downloadResources(type: Download) {
 	def version = "0.1.3.RELEASE"
